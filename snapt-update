@@ -1,0 +1,22 @@
+#!/bin/bash
+
+if [ "$EUID" -ne 0 ]; then
+  echo -e "Error: Please run this script as root."
+  exit 1
+fi
+
+echo -e "=== Initialising System Package Updates ===\n"
+
+echo -e "[1/2] Updating APT packages..."
+apt update
+apt upgrade
+apt full-upgrade
+apt autoremove
+apt autoclean
+echo -e "APT updates completed.\n"
+
+echo -e "[2/2] Updating Snap packages..."
+snap refresh
+echo -e "Snap updates completed.\n"
+
+echo -e "=== All Your Updates Are Belong To Us ==="
